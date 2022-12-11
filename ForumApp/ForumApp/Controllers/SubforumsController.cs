@@ -109,7 +109,7 @@ namespace ForumApp.Controllers
             if(ModelState.IsValid)
             {
                 subforum.SubforumName = requestSubforum.SubforumName;
-
+                subforum.SubforumDesc = requestSubforum.SubforumDesc;
                 subforum.AccessLevel = requestSubforum.AccessLevel;
                 db.SaveChanges();
                 return Redirect("/Subforums/Show/" + id);
@@ -120,7 +120,18 @@ namespace ForumApp.Controllers
             }
         }
 
-
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            Subforum subforum = db.Subforums.Find(id);
+            if (subforum == null)
+            {
+                return HttpNotFound();
+            }
+            db.Subforums.Remove(subforum);
+            db.SaveChanges();
+            return Redirect("/Forums/Show/" + subforum.ForumId);
+        }
 
             private IActionResult HttpNotFound()
         {

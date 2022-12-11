@@ -29,6 +29,8 @@ namespace ForumApp.Models
 
         public string? LastPostUsr { get; set; }
 
+        public string? SubforumDesc { get; set; }
+
         [Required(ErrorMessage = "Data crearii subforumului este obligatorie!")]
         public DateTime CreationDate { get; set; }
         public virtual Forum? Forum { get; set; }

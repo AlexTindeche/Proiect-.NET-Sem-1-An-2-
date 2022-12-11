@@ -26,6 +26,11 @@
                 @Html.ValidationMessage("SubforumName", null, new { @class = "text-danger" })
                 ;
                 <br />
+                @Html.Label("SubforumDesc", "Description of the Subforum")
+                ;
+                <br />
+                @Html.TextBox("SubforumDesc", @Model.SubforumDesc, new { @class = "form-control" })
+                ;
                 <br />
                 @Html.DropDownListFor(m => m.SubforumType,
             new SelectList(Model.AccessLevel, "Value", "Text"), "Select access level",
