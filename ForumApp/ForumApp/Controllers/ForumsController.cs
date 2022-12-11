@@ -23,7 +23,7 @@ namespace ForumApp.Controllers
              * - Subforum 2
              */
             Forum forum = db.Forums.Include("Section").Include("Subforums")
-                            .Where(subforu => subforu.Id == id)
+                            .Where(foru => foru.Id == id)
                             .First();
             return View(forum);
         }

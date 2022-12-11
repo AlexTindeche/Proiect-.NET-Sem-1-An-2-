@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ForumApp.Models
 {
@@ -21,16 +23,21 @@ namespace ForumApp.Models
         public int MsgCount { get; set; }
         public int ViewCount { get; set; }
         
-        [Required(ErrorMessage = "Precizarea userului care a creat subforumul este obligatorie!")]
+        // [Required(ErrorMessage = "Precizarea userului care a creat subforumul este obligatorie!")]
 
-        public string Creator { get; set; }
+        public string? Creator { get; set; }
 
-        public string LastPostUsr { get; set; }
+        public string? LastPostUsr { get; set; }
 
         [Required(ErrorMessage = "Data crearii subforumului este obligatorie!")]
         public DateTime CreationDate { get; set; }
-        
+        public virtual Forum? Forum { get; set; }
+        public virtual Section? Section { get; set; }
 
-        public virtual ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Post>? Posts { get; set; }
+
+        [NotMapped]
+        public IEnumerable<SelectListItem>? AccessLevel { get; set; }
+
     }
 }

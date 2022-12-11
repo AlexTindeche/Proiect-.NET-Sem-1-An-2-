@@ -26,6 +26,8 @@ namespace ForumApp.Models
         [Required(ErrorMessage = "Userul care a creat postarea trebuie sa fie specificat!")]
         public int UserId { get; set; }
 
+        public string? UserName { get; set; }
+
 
 
 

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ForumApp.Data.Migrations
+namespace ForumApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -43,9 +43,8 @@ namespace ForumApp.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("ForumType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ForumType")
+                        .HasColumnType("int");
 
                     b.Property<int>("MsgCount")
                         .HasColumnType("int");
@@ -109,9 +108,8 @@ namespace ForumApp.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SectionType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SectionType")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -143,14 +141,16 @@ namespace ForumApp.Data.Migrations
                     b.Property<int>("MsgCount")
                         .HasColumnType("int");
 
+                    b.Property<int?>("SectionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SubforumName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("SubforumType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SubforumType")
+                        .HasColumnType("int");
 
                     b.Property<int>("ViewCount")
                         .HasColumnType("int");
@@ -158,6 +158,8 @@ namespace ForumApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ForumId");
+
+                    b.HasIndex("SectionId");
 
                     b.ToTable("Subforums");
                 });
@@ -366,11 +368,13 @@ namespace ForumApp.Data.Migrations
 
             modelBuilder.Entity("ForumApp.Models.Forum", b =>
                 {
-                    b.HasOne("ForumApp.Models.Section", null)
+                    b.HasOne("ForumApp.Models.Section", "Section")
                         .WithMany("Forums")
                         .HasForeignKey("SectionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Section");
                 });
 
             modelBuilder.Entity("ForumApp.Models.Post", b =>
@@ -384,11 +388,19 @@ namespace ForumApp.Data.Migrations
 
             modelBuilder.Entity("ForumApp.Models.Subforum", b =>
                 {
-                    b.HasOne("ForumApp.Models.Forum", null)
+                    b.HasOne("ForumApp.Models.Forum", "Forum")
                         .WithMany("Subforums")
                         .HasForeignKey("ForumId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("ForumApp.Models.Section", "Section")
+                        .WithMany()
+                        .HasForeignKey("SectionId");
+
+                    b.Navigation("Forum");
+
+                    b.Navigation("Section");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
