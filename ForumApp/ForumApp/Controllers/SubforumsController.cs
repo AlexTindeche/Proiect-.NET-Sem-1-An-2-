@@ -42,7 +42,7 @@ namespace ForumApp.Controllers
             ViewBag.sectionName = s.SectionName;
             ViewBag.forumId = f.Id;
             ViewBag.forumName = f.ForumName;
-
+            subforum.SectionId = f.SectionId;
 
 
             subforum.AccessLevel = GetAllCategories();
@@ -69,6 +69,7 @@ namespace ForumApp.Controllers
             subforum.LastPostUsr = "NULL";
             subforum.AccessLevel = GetAllCategories();
             subforum.Id = 0; // Fara asta da SqlException: Cannot insert explicit value for identity column in table 'Subforums' when IDENTITY_INSERT is set to OFF. Nu intelegem de ce
+            subforum.SectionId = f.SectionId;
             if (ModelState.IsValid)
             {
                 db.Subforums.Add(subforum);

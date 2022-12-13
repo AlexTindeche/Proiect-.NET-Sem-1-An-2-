@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ForumApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221209155006_Forums")]
+    [Migration("20221211183335_Forums")]
     partial class Forums
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,6 +88,9 @@ namespace ForumApp.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("SubforumId");
@@ -130,21 +133,25 @@ namespace ForumApp.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Creator")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ForumId")
                         .HasColumnType("int");
 
                     b.Property<string>("LastPostUsr")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MsgCount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SectionId")
+                    b.Property<long>("SectionId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("SectionId1")
                         .HasColumnType("int");
+
+                    b.Property<string>("SubforumDesc")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SubforumName")
                         .IsRequired()
@@ -161,7 +168,7 @@ namespace ForumApp.Migrations
 
                     b.HasIndex("ForumId");
 
-                    b.HasIndex("SectionId");
+                    b.HasIndex("SectionId1");
 
                     b.ToTable("Subforums");
                 });
@@ -398,7 +405,7 @@ namespace ForumApp.Migrations
 
                     b.HasOne("ForumApp.Models.Section", "Section")
                         .WithMany()
-                        .HasForeignKey("SectionId");
+                        .HasForeignKey("SectionId1");
 
                     b.Navigation("Forum");
 

@@ -41,6 +41,7 @@ namespace ForumApp.Controllers
         {
             forum.ForumAccess = GetAllCategories();
             forum.Sect = GetAllSections();
+            forum.Id = 0;
             if (ModelState.IsValid)
             {
                 db.Forums.Add(forum);

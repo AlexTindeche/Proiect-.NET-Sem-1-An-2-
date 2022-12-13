@@ -200,14 +200,16 @@ namespace ForumApp.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ForumId = table.Column<int>(type: "int", nullable: false),
+                    SectionId = table.Column<long>(type: "bigint", nullable: false),
                     SubforumType = table.Column<int>(type: "int", nullable: false),
                     SubforumName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     MsgCount = table.Column<int>(type: "int", nullable: false),
                     ViewCount = table.Column<int>(type: "int", nullable: false),
-                    Creator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastPostUsr = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Creator = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastPostUsr = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SubforumDesc = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SectionId = table.Column<int>(type: "int", nullable: true)
+                    SectionId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -219,8 +221,8 @@ namespace ForumApp.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Subforums_Sections_SectionId",
-                        column: x => x.SectionId,
+                        name: "FK_Subforums_Sections_SectionId1",
+                        column: x => x.SectionId1,
                         principalTable: "Sections",
                         principalColumn: "Id");
                 });
@@ -235,7 +237,8 @@ namespace ForumApp.Migrations
                     PostContent = table.Column<string>(type: "nvarchar(max)", maxLength: 10000, nullable: false),
                     SubforumId = table.Column<int>(type: "int", nullable: false),
                     PostDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -303,9 +306,9 @@ namespace ForumApp.Migrations
                 column: "ForumId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Subforums_SectionId",
+                name: "IX_Subforums_SectionId1",
                 table: "Subforums",
-                column: "SectionId");
+                column: "SectionId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

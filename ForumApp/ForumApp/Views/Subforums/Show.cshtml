@@ -30,12 +30,12 @@
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">Posts</h5>
-        <button href="/Posts/New">Add post</button>
+        <a class="btn btn-secondary btn-sm" href="/Posts/New/@Model.Id">Add Post</a>
         @foreach (var pos in Model.Posts)
         {
             <div class="card" style="width: 35rem;">
                 <div class="card-body">
-                    <h5 class="card-title">@pos.PostTitle</h5>
+                    <h5 class="card-title"><a style="text-decoration:none; color:black" href="/Posts/Show/@pos.Id">@pos.PostTitle</a></h5>
                     <small>@pos.PostDate</small>
                     <p class="card-text">@pos.PostContent</p>
                     <small style="color:gray">Postat de: @pos.UserName</small>
