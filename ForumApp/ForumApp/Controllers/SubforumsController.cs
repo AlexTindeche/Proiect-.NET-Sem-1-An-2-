@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Section = ForumApp.Models.Section;
 using Ganss.Xss;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace ForumApp.Controllers
 {

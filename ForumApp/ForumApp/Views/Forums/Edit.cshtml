@@ -60,10 +60,14 @@
                 @Html.ValidationMessage("Section", null, new {@class = "text-danger"})
                 <br />
 
-                <label>Select access level</label>
-                @Html.DropDownListFor(m => m.ForumType,
-            new SelectList(Model.ForumAccess, "Value", "Text"), "Select access level",
-            new { @class = "form-control" })
+                @if(User.IsInRole("Admin"))
+                {
+                    <label>Select access level</label>
+                    @Html.DropDownListFor(m => m.ForumType,
+                            new SelectList(Model.ForumAccess, "Value", "Text"), "Select access level",
+                            new { @class = "form-control" })
+                }
+                
                 //@Html.ValidationMessage("SectionType", null, new { @class = "text-danger" })
                 <br />
                 <button class="btn btn-sm btn-success" type="submit">Edit forum</button>

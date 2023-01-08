@@ -115,7 +115,7 @@ namespace ForumApp.Controllers
             }
         }
 
-        [Authorize(Roles = "Editor,Admin")]
+        [Authorize(Roles = "User,Editor,Admin")]
         public IActionResult Edit(int id)
         {
             Forum forum = db.Forums.Include("Section")
@@ -123,7 +123,15 @@ namespace ForumApp.Controllers
                             .First();
             forum.ForumAccess = GetAllCategories();
             forum.Sect = GetAllSections();
-            return View(forum);
+            if(forum.UserId == _userManager.GetUserId(User) || User.IsInRole("Admin") || User.IsInRole("Editor"))
+            {
+                return View(forum);
+            }
+            else
+            {
+                TempData["message"] = "Nu aveti drepturi de editare asupra acestui forum!";
+                return Redirect("/Forums/Show/" + id);
+            }
         }
 
         [HttpPost]
@@ -136,15 +144,24 @@ namespace ForumApp.Controllers
 
             if(ModelState.IsValid)
             {
-                forum.ForumName = requestForum.ForumName;
-                forum.ForumDescription = requestForum.ForumDescription;
-                forum.SectionId = requestForum.SectionId;
-                forum.ForumType = requestForum.ForumType;
-                db.SaveChanges();
-                return Redirect("/Forums/Show/" + id);
+                if (forum.UserId == _userManager.GetUserId(User) || User.IsInRole("Admin") || User.IsInRole("Editor"))
+                {
+                    forum.ForumName = requestForum.ForumName;
+                    forum.ForumDescription = requestForum.ForumDescription;
+                    forum.SectionId = requestForum.SectionId;
+                    forum.ForumType = requestForum.ForumType;
+                    db.SaveChanges();
+                    return Redirect("/Forums/Show/" + id);
+                }
+                else
+                {
+                    TempData["message"] = "Nu aveti drepturi de editare asupra acestui forum!";
+                    return Redirect("/Forums/Show/" + id);
+                }
             }
             else
             {
+                requestForum.ForumAccess= GetAllCategories();
                 return View(requestForum);
             }
         }

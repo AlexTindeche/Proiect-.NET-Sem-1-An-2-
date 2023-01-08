@@ -51,9 +51,12 @@
 
     <br />
 
-    <i class="bi bi-card-list"></i>
-    <label>Selectati rolul</label>
-    @Html.DropDownList("newRole", new SelectList(Model.AllRoles, "Value", "Text", ViewBag.UserRole), null, new { @class = "form-control" })
+    @if(User.IsInRole("Admin")){
+        <i class="bi bi-card-list"></i>
+        <label>Selectati rolul</label>
+        @Html.DropDownList("newRole", new SelectList(Model.AllRoles, "Value", "Text", ViewBag.UserRole), null, new { @class = "form-control" })
+    }
+    
 
     <br />
 

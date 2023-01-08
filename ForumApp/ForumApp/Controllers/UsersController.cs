@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ForumApp.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext db;
@@ -26,6 +26,7 @@ namespace ForumApp.Controllers
             _roleManager = roleManager;
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             var users = from user in db.Users
@@ -36,10 +37,11 @@ namespace ForumApp.Controllers
             return View();
         }
 
+        [Authorize(Roles = "User,Editor,Admin")]
         public async Task<ActionResult> Edit(string id)
         {
             ApplicationUser user = db.Users.Find(id);
-
+            SetAccessRights();
             user.AllRoles = GetAllRoles();
 
             var roleNames = await _userManager.GetRolesAsync(user);     // listam numele rolurilor
@@ -52,11 +54,26 @@ namespace ForumApp.Controllers
 
             ViewBag.UserRole = currentUserRole;
 
-            return View(user);
+            // verificam daca userul care acceseaza viewul editului este admin
+            // sau este userul insusi
+            if(user.Id == _userManager.GetUserId(User) || User.IsInRole("Admin"))
+            {
+                return View(user);
+            }
+            else
+            {
+                TempData["message"] = "Access denied!";
+                return Redirect("/Sections/Index");
+            }
 
         }
 
-        [HttpPost]
+        private void SetAccessRights()
+        {
+            ViewBag.UserCurent = _userManager.GetUserId(User);
+        }
+
+            [HttpPost]
         public async Task<ActionResult> Edit(string id, ApplicationUser newUser, [FromForm] string newRole)
         {
             ApplicationUser user = db.Users.Find(id);
@@ -64,26 +81,40 @@ namespace ForumApp.Controllers
             user.AllRoles = GetAllRoles();
             if(ModelState.IsValid)
             {
-                user.UserName = newUser.UserName;
-                user.Email = newUser.Email;
-                user.FirstName = newUser.FirstName;
-                user.LastName = newUser.LastName;
-                user.PhoneNumber = newUser.PhoneNumber;
 
-                // cautam rolurile in baza de date
-                var roles = db.Roles.ToList();
-                foreach (var role in roles)
+                // verificam sa nu faca cineva pe hackerul
+                if (user.Id == _userManager.GetUserId(User) || User.IsInRole("Admin"))
                 {
-                    // scoatem userul din rolul precedent
-                    await _userManager.RemoveFromRoleAsync(user, role.Name);
-                }
-                // il unim cu rolul selectat
-                var roleName = await _roleManager.FindByIdAsync(newRole);
-                await _userManager.AddToRoleAsync(user, roleName.ToString());
+                    user.UserName = newUser.UserName;
+                    user.Email = newUser.Email;
+                    user.FirstName = newUser.FirstName;
+                    user.LastName = newUser.LastName;
+                    user.PhoneNumber = newUser.PhoneNumber;
 
-                db.SaveChanges();
+                    // cautam rolurile in baza de date
+                    var roles = db.Roles.ToList();
+                    foreach (var role in roles)
+                    {
+                        // scoatem userul din rolul precedent
+                        await _userManager.RemoveFromRoleAsync(user, role.Name);
+                    }
+                    // il unim cu rolul selectat
+                    var roleName = await _roleManager.FindByIdAsync(newRole);
+                    await _userManager.AddToRoleAsync(user, roleName.ToString());
+
+                    db.SaveChanges();
+                }
             }
-            return RedirectToAction("Index");
+            if(User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["message"] = "Changes applied successfully!";
+                return Redirect("/Sections/Index");
+            }
+            
         }
 
         public async Task<ActionResult> Show(string Id)
