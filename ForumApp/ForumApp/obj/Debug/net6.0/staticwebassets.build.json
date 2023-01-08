@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zsYGI9aN1TbEmqyFSHtEeeTi7mN25t+87mgX+IsfmcI=",
+  "Hash": "iiLJaueysHsvcXhdl58NRJWVFoV7n4nnfMKvgUbDYaA=",
   "Source": "ForumApp",
   "BasePath": "_content/ForumApp",
   "Mode": "Default",
@@ -1086,23 +1086,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Content\\Images\\Eye.jpeg"
-    },
-    {
-      "Identity": "D:\\Teme\\Informatica\\Github\\Proiect-.NET-Sem-1-An-2-\\ForumApp\\ForumApp\\wwwroot\\css\\home.css",
-      "SourceId": "ForumApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\Teme\\Informatica\\Github\\Proiect-.NET-Sem-1-An-2-\\ForumApp\\ForumApp\\wwwroot\\",
-      "BasePath": "_content/ForumApp",
-      "RelativePath": "css/home.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\home.css"
     },
     {
       "Identity": "D:\\Teme\\Informatica\\Github\\Proiect-.NET-Sem-1-An-2-\\ForumApp\\ForumApp\\wwwroot\\css\\site.css",

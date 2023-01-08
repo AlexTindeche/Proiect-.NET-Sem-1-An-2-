@@ -53,4 +53,12 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
+app.MapControllerRoute(
+    name: "sortareForum",
+    pattern: "{controller=Sections}/{action=Show}/{id}/{showOrder?}");
+
+app.MapControllerRoute(
+    name: "sortareSubforum",
+    pattern: "{controller=Forums}/{action=Show}/{id}/{showOrder?}");
+
 app.Run();

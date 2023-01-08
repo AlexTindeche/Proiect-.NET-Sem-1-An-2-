@@ -27,17 +27,37 @@ namespace ForumApp.Controllers
         }
 
         [Authorize(Roles = "User,Editor,Admin")]
-        public IActionResult Show(int id)
+        public IActionResult Show(int id, int? showOrder)
         {
-            /*
-             * Titlu forum
-             * - Subforum 1
-             * - Subforum 2
-             */
-            // includem user sa afisam cine a creat
             Forum forum = db.Forums.Include("Section").Include("Subforums").Include("User")
                             .Where(foru => foru.Id == id)
                             .First();
+
+            if (showOrder == null)
+            {
+                showOrder = 0;
+            }
+            ViewBag.showOrder = showOrder;
+
+            switch (showOrder)
+            {
+                case 1:
+                    forum.Subforums = (ICollection<Subforum>?)forum.Subforums.OrderBy(sf => sf.CreationDate).ToList();
+                    break;
+                case 2:
+                    forum.Subforums = (ICollection<Subforum>?)forum.Subforums.OrderBy(sf => sf.SubforumName).ToList();
+                    break;
+                case 3:
+                    forum.Subforums = (ICollection<Subforum>?)forum.Subforums.OrderByDescending(sf => sf.SubforumName).ToList();
+                    break;
+                case 4:
+                    forum.Subforums = (ICollection<Subforum>?)forum.Subforums.OrderByDescending(sf => sf.MsgCount).ToList();
+                    break;
+                default:
+                    forum.Subforums = (ICollection<Subforum>?)forum.Subforums.OrderByDescending(sf => sf.CreationDate).ToList();
+                    break;
+            }
+
             SetAccessRights();
             return View(forum);
         }
