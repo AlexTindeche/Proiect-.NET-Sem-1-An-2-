@@ -36,6 +36,26 @@ namespace ForumApp.Controllers
             return View();
         }
 
+        public async Task<ActionResult> Edit(string id)
+        {
+            ApplicationUser user = db.Users.Find(id);
+
+            user.AllRoles = GetAllRoles();
+
+            var roleNames = await _userManager.GetRolesAsync(user);     // listam numele rolurilor
+
+            // cautam id ul rolului in baza de date
+            var currentUserRole = _roleManager.Roles
+                                              .Where(r => roleNames.Contains(r.Name))
+                                              .Select(r => r.Id)
+                                              .First();     // k selectam un singur rol
+
+            ViewBag.UserRole = currentUserRole;
+
+            return View(user);
+
+        }
+
         public async Task<ActionResult> Show(string Id)
         {
             ApplicationUser user = db.Users.Find(Id);
@@ -96,6 +116,25 @@ namespace ForumApp.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        [NonAction]
+        public IEnumerable<SelectListItem> GetAllRoles()
+        {
+            var selectList = new List<SelectListItem>();
+
+            var roles = from role in db.Roles
+                        select role;
+
+            foreach (var role in roles)
+            {
+                selectList.Add(new SelectListItem
+                {
+                    Value = role.Id.ToString(),
+                    Text = role.Name.ToString()
+                });
+            }
+            return selectList;
         }
     }
 }
