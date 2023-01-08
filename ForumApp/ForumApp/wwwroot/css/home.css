@@ -34,6 +34,7 @@ body {
 a {
     color: #3f3d3d;
     text-decoration: none;
+
 }
 
 a:hover {
@@ -41,7 +42,8 @@ a:hover {
     text-decoration: underline;
 }
 
-.buton {
+.buton-wrapper {
+    line-height: 1em;
     grid-column-start: 1;
     grid-column-end: 1;
     grid-row-start: 2;

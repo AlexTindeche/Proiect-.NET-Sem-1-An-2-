@@ -71,7 +71,7 @@ namespace ForumApp.Controllers
             }
             else
             {
-                return Redirect("Subforums/Show/" + post.SubforumId);
+                return Redirect("/Subforums/Show/" + post.SubforumId);
             }
         }
 
