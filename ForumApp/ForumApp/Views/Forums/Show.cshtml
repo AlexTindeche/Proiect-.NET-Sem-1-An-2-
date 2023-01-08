@@ -115,3 +115,27 @@
     }
     </div>
 </div>
+
+@if (User.IsInRole("Admin"))
+{
+
+    <hr style="width: 100vw; height:3px; color: red" />
+    <p>Pentru ca esti admin poti vedea subiectele de discutie private</p>
+
+    @foreach (var subf in @Model.Subforums)
+    {
+        @if (subf.SubforumType == 0)                                                         // daca subforumul este privat se afiseaza
+        {
+            <div class="card" style="width: 35rem;">
+                <div class="card-body">
+                    <h5 style="font-size: 25px" class="card-title"><a style="text-decoration:none; color:black" href="/Subforums/Show/@subf.Id">@subf.SubforumName</a></h5>
+                    <p style="font-size: 14px">@subf.MsgCount replies</p>
+                    <small style="color:gray">@subf.ViewCount views</small><br />
+
+                    <small style="color:gray">Created on @subf.CreationDate</small>
+                </div>
+            </div>
+        }
+
+    }
+}

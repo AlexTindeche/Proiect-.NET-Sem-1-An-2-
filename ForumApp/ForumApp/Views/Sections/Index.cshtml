@@ -48,4 +48,32 @@
         }
     </div>
     
+    @if(User.IsInRole("Admin"))
+    {
+
+        <hr style="width: 100vw; height:3px; color: red"/>
+        <p>Pentru ca esti admin poti vedea subiectele de discutie private</p>
+
+        @foreach (var sect in ViewBag.Sections)
+        {
+            @if (sect.SectionType == 1)                            // daca sectiunea este privata
+            {
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title titluSectiune"><a style="text-decoration:underline; color:#fef6ec;" href="/Sections/Show/@sect.Id">@sect.SectionName</a></h3>
+
+                        @foreach (ForumApp.Models.Forum forum in sect.Forums)
+                        {
+                            @if (forum.ForumType == 1)             // daca forumul este privat
+                            {
+                                <partial name="ForumInfo" model="forum"></partial>
+                            }
+
+                        }
+                    </div>
+                </div>
+            }
+        }
+    }
+
 </div>
