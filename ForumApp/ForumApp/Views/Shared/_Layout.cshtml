@@ -34,9 +34,6 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Sections" asp-action="Index">Forum</a>
-                        </li>
-                        <li>
                             @if (User.IsInRole("Admin"))
                             {
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "iiLJaueysHsvcXhdl58NRJWVFoV7n4nnfMKvgUbDYaA=",
+  "Hash": "+ot1NPV3s1iLU2MgjUJreSGwO4R+LZt0ndrNKilfUqE=",
   "Source": "ForumApp",
   "BasePath": "_content/ForumApp",
   "Mode": "Default",
@@ -1086,6 +1086,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Content\\Images\\Eye.jpeg"
+    },
+    {
+      "Identity": "D:\\Teme\\Informatica\\Github\\Proiect-.NET-Sem-1-An-2-\\ForumApp\\ForumApp\\wwwroot\\Content\\Images\\moonMan.png",
+      "SourceId": "ForumApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Teme\\Informatica\\Github\\Proiect-.NET-Sem-1-An-2-\\ForumApp\\ForumApp\\wwwroot\\",
+      "BasePath": "_content/ForumApp",
+      "RelativePath": "Content/Images/moonMan.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Content\\Images\\moonMan.png"
+    },
+    {
+      "Identity": "D:\\Teme\\Informatica\\Github\\Proiect-.NET-Sem-1-An-2-\\ForumApp\\ForumApp\\wwwroot\\css\\home.css",
+      "SourceId": "ForumApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Teme\\Informatica\\Github\\Proiect-.NET-Sem-1-An-2-\\ForumApp\\ForumApp\\wwwroot\\",
+      "BasePath": "_content/ForumApp",
+      "RelativePath": "css/home.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\home.css"
     },
     {
       "Identity": "D:\\Teme\\Informatica\\Github\\Proiect-.NET-Sem-1-An-2-\\ForumApp\\ForumApp\\wwwroot\\css\\site.css",
