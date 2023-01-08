@@ -56,6 +56,36 @@ namespace ForumApp.Controllers
 
         }
 
+        [HttpPost]
+        public async Task<ActionResult> Edit(string id, ApplicationUser newUser, [FromForm] string newRole)
+        {
+            ApplicationUser user = db.Users.Find(id);
+
+            user.AllRoles = GetAllRoles();
+            if(ModelState.IsValid)
+            {
+                user.UserName = newUser.UserName;
+                user.Email = newUser.Email;
+                user.FirstName = newUser.FirstName;
+                user.LastName = newUser.LastName;
+                user.PhoneNumber = newUser.PhoneNumber;
+
+                // cautam rolurile in baza de date
+                var roles = db.Roles.ToList();
+                foreach (var role in roles)
+                {
+                    // scoatem userul din rolul precedent
+                    await _userManager.RemoveFromRoleAsync(user, role.Name);
+                }
+                // il unim cu rolul selectat
+                var roleName = await _roleManager.FindByIdAsync(newRole);
+                await _userManager.AddToRoleAsync(user, roleName.ToString());
+
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
         public async Task<ActionResult> Show(string Id)
         {
             ApplicationUser user = db.Users.Find(Id);
