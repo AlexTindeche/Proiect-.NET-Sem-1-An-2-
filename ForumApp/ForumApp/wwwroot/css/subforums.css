@@ -1,4 +1,15 @@
-﻿body {
+﻿.container-forum {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.forum-grid {
+    display: flex;
+    flex-direction: column;
+    background-color: #fef6ec;
+}
+
+body {
     background-color: #fef6ec;
     font-family: 'Noto Serif', serif;
     color: #3f3d3d;

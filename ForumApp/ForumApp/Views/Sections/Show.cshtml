@@ -7,6 +7,7 @@
 
 @Html.Partial("_CoverPhotoPartial")
 
+
 <div class="container-forum">
     <br />
     <div class="sectionHeader">
@@ -20,7 +21,7 @@
 
         <h3 class="card-title titluSectiune">@Model.SectionName</h3>
         <div class="buttons">
-            
+
 
             @if (ViewBag.EditareSectiuni == true)                @* Butonul de EDIT se va afisa doar pentru Admini si Editori *@
             {
@@ -65,29 +66,28 @@
                 </div>
             </div>
         </div>
-
+        <br />
         <form method="GET">
             <div class="input-group mb-3">
                 <input type="text" class="form-control"
-                       placeholder="Search in forums and subforums" name="search"
+                       placeholder="Cauta un anumit subiect de discutie sau o anumita conversatie" name="search"
                        value="@ViewBag.SearchString">
-                <button class="btn btn-outline-success"
+                <button class="btn"
                         type="submit">
-                    Search
+                    Cauta
                 </button>
             </div>
         </form>
     </div>
-</div>
 
-<br />
+    <br />
 
 
 
     <br />
     <div class="card">
         <div class="card-body">
-        <h5 class="card-title titlu">Subiecte de discutie</h5>
+            <h5 class="card-title titlu">Subiecte de discutie</h5>
             @* Buton pentru a adauga un forum nou in sectiunea in care ne aflam *@
             <a class="btn creare" href="/Forums/New/@Model.Id">Adauga un nou subiect de discutie</a>
             @foreach (ForumApp.Models.Forum forum in Model.Forums)
@@ -99,3 +99,5 @@
             }
         </div>
     </div>
+</div>
+

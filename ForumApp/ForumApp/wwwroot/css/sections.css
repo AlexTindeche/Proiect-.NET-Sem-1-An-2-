@@ -1,15 +1,18 @@
-﻿.forum-grid {
-    display: flex;
-    flex-direction: column;
+﻿body {
     background-color: #fef6ec;
+    font-family: 'Noto Serif', serif;
+    color: #3f3d3d;
+}
+
+.container-forum {
     margin-left: 20px;
     margin-right: 20px;
 }
 
-body {
+.forum-grid {
+    display: flex;
+    flex-direction: column;
     background-color: #fef6ec;
-    font-family: 'Noto Serif', serif;
-    color: #3f3d3d;
 }
 
 .card {

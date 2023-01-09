@@ -9,7 +9,7 @@
 
 <div class="container-forum">
     <br />
-    <div class = "sectionHeader">
+    <div class="sectionHeader">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/Home">Home</a></li>
@@ -19,12 +19,12 @@
         <h1>Topic-uri</h1>
         @if (User.IsInRole("Admin"))     @* daca e true atunci este ADMIN *@
         {
-            <a class="btn"  href="/Sections/New/">Creeaza un nou topic</a> @*trebuie mutat asta*@
+            <a class="btn" href="/Sections/New/">Creeaza un nou topic</a> @*trebuie mutat asta*@
         }
         <a class="btn" href="/Forums/New/">Creeaza un subiect de discutie nou </a>
     </div>
-   <br />
-    
+    <br />
+
 
     <div class="forum-grid">
         @foreach (var sect in ViewBag.Sections)
@@ -48,11 +48,11 @@
             }
         }
     </div>
-    
-    @if(User.IsInRole("Admin"))
+
+    @if (User.IsInRole("Admin"))
     {
 
-        <hr style="width: 100vw; height:3px; color: red"/>
+        <hr style="height:3px; color: red" />
         <p>Pentru ca esti admin poti vedea subiectele de discutie private</p>
 
         @foreach (var sect in ViewBag.Sections)
@@ -76,5 +76,4 @@
             }
         }
     }
-
 </div>

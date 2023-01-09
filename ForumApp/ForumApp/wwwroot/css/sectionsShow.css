@@ -1,10 +1,12 @@
-﻿
+﻿.container-forum {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
 .forum-grid {
     display: flex;
     flex-direction: column;
     background-color: #fef6ec;
-    margin-left: 20px;
-    margin-right: 20px;
 }
 
 body {
@@ -27,13 +29,24 @@ h1, h2, h3, h4, h5 {
     margin: 0;
 }
 
-.buttons .btn, .buttons button, .creare {
+.container-forum .btn {
     outline-color: black;
     background-color: #3f3d3d;
     color: #fef6ec;
 }
 
-.buttons .btn:hover, .creare:hover {
+.container-forum .btn:hover {
+    background-color: #c7c1b9;
+    color: #3f3d3d;
+}
+
+button {
+    outline-color: black;
+    background-color: #3f3d3d;
+    color: #fef6ec;
+}
+
+button:hover {
     background-color: #c7c1b9;
     color: #3f3d3d;
 }

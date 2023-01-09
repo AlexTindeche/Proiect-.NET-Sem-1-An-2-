@@ -14,8 +14,8 @@
     <div class="sectionHeader">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="/Sections/Index/">Sections</a></li>
+                <li class="breadcrumb-item"><a href="/Home/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/Sections/Index/">Topic-uri</a></li>
                 <li class="breadcrumb-item"><a href="/Sections/Show/@Model.SectionId">@Model.Section.SectionName</a></li>
                 <li class="breadcrumb-item active" aria-current="page">@Model.ForumName</li>
             </ol>
@@ -89,53 +89,53 @@
             </div>
         </div>
     </div>
-</div>
-
-<br />
+    <br />
 
 
-<div class="card">
-    <div class="card-body">
-    <a class="btn btn-sm creare" href="/Subforums/New/@Model.Id">Initiaza o discutie</a>
-    @foreach(var subf in @Model.Subforums)
-    {
-        @if(subf.SubforumType == 0)                                                         // daca subforumul este public se afiseaza
-        {
-            <div class="card" style="width: 35rem;">
-                <div class="card-body">
-                    <h5 style="font-size: 25px" class="card-title"><a style="text-decoration:none; color:black" href="/Subforums/Show/@subf.Id">@subf.SubforumName</a></h5>
-                        <p style="font-size: 14px">@subf.MsgCount replies</p>
-                    <small style="color:gray">@subf.ViewCount views</small><br/>
+    <div class="card">
+        <div class="card-body">
+            <a class="btn btn-sm creare" href="/Subforums/New/@Model.Id">Initiaza o discutie</a>
+            @foreach (var subf in @Model.Subforums)
+            {
+                @if (subf.SubforumType == 0)                                                         // daca subforumul este public se afiseaza
+                {
+                    <div class="card" style="width: 35rem;">
+                        <div class="card-body">
+                            <h5 style="font-size: 25px" class="card-title"><a style="text-decoration:none; color:black" href="/Subforums/Show/@subf.Id">@subf.SubforumName</a></h5>
+                            <p style="font-size: 14px">@subf.MsgCount replies</p>
+                            <small style="color:gray">@subf.ViewCount views</small><br />
 
-                    <small style="color:gray">Created on @subf.CreationDate</small>
-                </div>
-            </div>
-        }
-        
-    }
+                            <small style="color:gray">Created on @subf.CreationDate</small>
+                        </div>
+                    </div>
+                }
+
+            }
+        </div>
     </div>
+
+    @if (User.IsInRole("Admin"))
+    {
+
+        <hr style="height:3px; color: red" />
+        <p>Pentru ca esti admin poti vedea subiectele de discutie private</p>
+
+        @foreach (var subf in @Model.Subforums)
+        {
+            @if (subf.SubforumType == 1)                                                         // daca subforumul este privat se afiseaza
+            {
+                <div class="card" style="width: 35rem;">
+                    <div class="card-body">
+                        <h5 style="font-size: 25px" class="card-title"><a style="text-decoration:none; color:black" href="/Subforums/Show/@subf.Id">@subf.SubforumName</a></h5>
+                        <p style="font-size: 14px">@subf.MsgCount replies</p>
+                        <small style="color:gray">@subf.ViewCount views</small><br />
+
+                        <small style="color:gray">Created on @subf.CreationDate</small>
+                    </div>
+                </div>
+            }
+
+        }
+    }
 </div>
 
-@if (User.IsInRole("Admin"))
-{
-
-    <hr style="width: 100vw; height:3px; color: red" />
-    <p>Pentru ca esti admin poti vedea subiectele de discutie private</p>
-
-    @foreach (var subf in @Model.Subforums)
-    {
-        @if (subf.SubforumType == 0)                                                         // daca subforumul este privat se afiseaza
-        {
-            <div class="card" style="width: 35rem;">
-                <div class="card-body">
-                    <h5 style="font-size: 25px" class="card-title"><a style="text-decoration:none; color:black" href="/Subforums/Show/@subf.Id">@subf.SubforumName</a></h5>
-                    <p style="font-size: 14px">@subf.MsgCount replies</p>
-                    <small style="color:gray">@subf.ViewCount views</small><br />
-
-                    <small style="color:gray">Created on @subf.CreationDate</small>
-                </div>
-            </div>
-        }
-
-    }
-}
