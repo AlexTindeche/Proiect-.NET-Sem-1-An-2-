@@ -34,6 +34,9 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Sections" asp-action="Index">Sections</a>
+                        </li>
+                        <li>
                             @if (User.IsInRole("Admin"))
                             {
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
@@ -50,11 +53,7 @@
                             @if (ViewBag.UserCurent != null)
                             {
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Show" asp-route-id="@ViewBag.UserCurent">Vizualizare Profil</a>
-
                             }
-                        </li>
-                        <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Sections" asp-action="Index">Sections</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />

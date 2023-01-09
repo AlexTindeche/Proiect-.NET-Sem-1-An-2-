@@ -24,7 +24,7 @@
                     <li class="breadcrumb-item"><a href="/Home/">Home</a></li>
                     <li class="breadcrumb-item"><a href="/Sections/Index/">Sections</a></li>
                     <li class="breadcrumb-item"><a href="/Forums/Show/@Model.Forum.Id">@Model.Forum.ForumName</a></li>
-                    @*<li class="breadcrumb-item"><a href="/Forums/Show/@Model.Section.Id">@Model.Section.SectionName</a></li>*@
+ @*                   <li class="breadcrumb-item"><a href="/Forums/Show/@Model.Section.Id">@Model.Section.SectionName</a></li>*@
                     <li class="breadcrumb-item active" aria-current="page">@Model.SubforumName</li>
                 </ol>
             </nav>
@@ -57,7 +57,7 @@
                         <h5 style="font-size: 25px" class="card-title"><a style="text-decoration:none; color:black" href="/Posts/Show/@pos.Id">@pos.PostTitle</a></h5>
                         <small>@pos.PostDate</small>
                         <p style="font-size: 14px">@Html.Raw(HttpUtility.HtmlDecode(@pos.PostContent))</p>
-                        <small style="color:gray">Postat de: @pos.UserName</small>
+                        <small style="color:gray">Postat de: <a href="/Users/Show/@pos.UserId">@pos.UserName</a></small>
                     </div>
                 </div>
             }

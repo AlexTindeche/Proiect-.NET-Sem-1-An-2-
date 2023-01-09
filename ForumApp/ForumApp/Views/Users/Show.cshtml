@@ -14,11 +14,21 @@
 
                 <p><i class="bi bi-envelope"></i><em>Email utilizator: </em> @Model.Email</p>
 
-                <p><i class="bi bi-envelope"></i><em>Nr Telefon </em> @Model.PhoneNumber</p>
+                @if(Model.PhoneNumber != null)
+                {
+                    <p><i class="bi bi-envelope"></i><em>Nr Telefon: </em> @Model.PhoneNumber</p>
+                }
 
-                <p><i class="bi bi-envelope"></i><em>Nume: </em> @Model.FirstName</p>
+                @if(Model.FirstName != null)
+                {
+                    <p><i class="bi bi-envelope"></i><em>Nume: </em> @Model.FirstName</p>
+                }
+                
+                @if(Model.LastName != null)
+                {
+                    <p><i class="bi bi-envelope"></i><em>Prenume: </em> @Model.LastName</p>
 
-                <p><i class="bi bi-envelope"></i><em>Prenume </em> @Model.LastName</p>
+                }
 
                 @if (ViewBag.Roles.Count > 0)
                 {
@@ -28,8 +38,6 @@
                         <span class="rounded-pill bg-light mr-2 px-4 py-2 text-black">@role</span>
                     }
                 }
-
-
 
             </div>
 

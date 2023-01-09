@@ -32,7 +32,7 @@ namespace ForumApp.Controllers
             Forum forum = db.Forums.Include("Section").Include("Subforums").Include("User")
                             .Where(foru => foru.Id == id)
                             .First();
-
+            ViewBag.userName = forum.User.UserName;
             if (showOrder == null)
             {
                 showOrder = 0;

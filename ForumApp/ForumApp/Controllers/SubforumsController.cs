@@ -37,6 +37,7 @@ namespace ForumApp.Controllers
                 .Where(pos => pos.Id == id)
                 .First();
 
+
             ViewBag.userForumCreator = subforum.Forum.UserId;
             SetAccessRights();
             return View(subforum);
