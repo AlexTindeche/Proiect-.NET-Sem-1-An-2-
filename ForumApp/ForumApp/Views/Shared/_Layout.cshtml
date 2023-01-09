@@ -57,10 +57,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Sections" asp-action="Index">Sections</a>
                         </li>
                     </ul>
-                    @if (!User.Identity.IsAuthenticated)
-                    {
-                        <partial name="_LoginPartial" />
-                    }
+                    <partial name="_LoginPartial" />
 
                 </div>
             </div>
