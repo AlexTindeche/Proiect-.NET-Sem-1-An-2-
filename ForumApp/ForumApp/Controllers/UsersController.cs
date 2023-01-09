@@ -73,7 +73,8 @@ namespace ForumApp.Controllers
             ViewBag.UserCurent = _userManager.GetUserId(User);
         }
 
-            [HttpPost]
+        [HttpPost]
+        [Authorize(Roles = "User,Editor,Admin")]
         public async Task<ActionResult> Edit(string id, ApplicationUser newUser, [FromForm] string newRole)
         {
             ApplicationUser user = db.Users.Find(id);
@@ -122,12 +123,15 @@ namespace ForumApp.Controllers
             ApplicationUser user = db.Users.Find(Id);
             var roles = await _userManager.GetRolesAsync(user);
 
-            ViewBag.Roles = roles;
+            SetAccessRights();
 
+            ViewBag.Roles = roles;
             return View(user);
+            
         }
 
         [HttpPost]
+        [Authorize(Roles = "User,Editor,Admin")]
         public IActionResult Delete(string Id)
         {
             var user = db.Users
@@ -137,46 +141,58 @@ namespace ForumApp.Controllers
                             .Where(u => u.Id == Id)
                             .First();
 
-            // stergem forumurile create de user
-            if (user.Forums.Count > 0)
+            // daca e user simplu verific sa fie idul lui
+            // daca e admin verific sa nu-si dea singur delete
+            if ((user.Id == _userManager.GetUserId(User) && User.IsInRole("Admin") == false) || (user.Id != _userManager.GetUserId(User) && User.IsInRole("Admin"))) 
             {
-                
-                foreach (var forum in user.Forums)
+                // stergem forumurile create de user
+                if (user.Forums.Count > 0)
                 {
-                    //Subforum sf = db.Subforums.Find(u => u.Id == forum.Id);
 
-                    db.Forums.Remove(forum);
+                    foreach (var forum in user.Forums)
+                    {
+                        //Subforum sf = db.Subforums.Find(u => u.Id == forum.Id);
+
+                        db.Forums.Remove(forum);
+                    }
                 }
+
+                if (user.Subforums.Count > 0)
+                {
+                    foreach (var subforum in user.Subforums)
+                    {
+                        // decrementam numarul de subforumuri
+                        Forum f = db.Forums.Find(subforum.ForumId);
+                        f.CountOfSubforums--;
+                        db.Subforums.Remove(subforum);
+                    }
+                }
+
+                if (user.Posts.Count > 0)
+                {
+                    foreach (var post in user.Posts)
+                    {
+                        // decrementam nr de mesaje din forum si subforum
+                        Subforum sf = db.Subforums.Find(post.SubforumId);
+                        Forum f = db.Forums.Find(sf.ForumId);
+                        sf.MsgCount--;
+                        f.MsgCount--;
+                        db.Posts.Remove(post);
+                    }
+                }
+
+                db.ApplicationUsers.Remove(user);
+                db.SaveChanges();
             }
 
-            if (user.Subforums.Count > 0)
+            if (User.IsInRole("Admin"))
             {
-                foreach (var subforum in user.Subforums)
-                {
-                    // decrementam numarul de subforumuri
-                    Forum f = db.Forums.Find(subforum.ForumId);
-                    f.CountOfSubforums--;
-                    db.Subforums.Remove(subforum);
-                }
+                return RedirectToAction("Index");
             }
-
-            if (user.Posts.Count > 0)
+            else
             {
-                foreach (var post in user.Posts)
-                {
-                    // decrementam nr de mesaje din forum si subforum
-                    Subforum sf = db.Subforums.Find(post.SubforumId);
-                    Forum f = db.Forums.Find(sf.ForumId);
-                    sf.MsgCount--;
-                    f.MsgCount--;
-                    db.Posts.Remove(post);
-                }
+                return Redirect("/Identity/Account/Login");
             }
-
-            db.ApplicationUsers.Remove(user);
-            db.SaveChanges();
-
-            return RedirectToAction("Index");
         }
 
         [NonAction]

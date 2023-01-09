@@ -24,7 +24,7 @@
 
         <div class="d-flex flex-row justify-content-between p-3">
 
-            @if ((string)Model.Id != ViewBag.UserCurent)
+            @if (((string)Model.Id != ViewBag.UserCurent && User.IsInRole("Admin")) || (((string)Model.Id == ViewBag.UserCurent && User.IsInRole("Admin") == false)))
             {
                 @using (Html.BeginForm(actionName: "Delete", controllerName: "Users", method: FormMethod.Post, routeValues: new { id = @Model.Id }))
                 {

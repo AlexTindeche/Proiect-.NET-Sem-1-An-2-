@@ -54,9 +54,12 @@
                 @Html.TextBox("SubforumDesc", @Model.SubforumDesc, new { @class = "form-control" })
                 ;
                 <br />
+                @if (User.IsInRole("Admin"))
+                {
                 @Html.DropDownListFor(m => m.SubforumType,
             new SelectList(Model.AccessLevel, "Value", "Text"), "Select access level",
             new { @class = "form-control" })
+                }
                 <br />
                 <button class="btn btn-sm btn-success" type="submit">Edit</button>
             }
