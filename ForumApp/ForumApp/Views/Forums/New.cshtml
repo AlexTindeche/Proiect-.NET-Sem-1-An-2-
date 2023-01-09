@@ -25,7 +25,7 @@
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="/Home/">Home</a></li>
         <li class="breadcrumb-item"><a href="/Sections/Index/">Sections</a></li>
         <li class="breadcrumb-item active" aria-current="page">Create Forum</li>
     </ol>
@@ -39,13 +39,13 @@
             @using (Html.BeginForm(method: FormMethod.Post, actionName: "New", controllerName: "Forums"))
             {
 @*                <h1>@Model.Section.SectionName</h1>*@
-                @Html.Label("ForumName", "Forum name");
+                @Html.Label("ForumName", "Titlul subiectului de discutie");
                 <br />
                 @Html.TextBox("ForumName", null, new { @class = "form-control" })
                 @Html.ValidationMessage("ForumName", null, new {@class = "text-danger"})
                 <br /><br />
 
-                @Html.Label("ForumDescription", "Enter a description for your forum")
+                @Html.Label("ForumDescription", "O scurta descriere")
                 <br />
                 @Html.TextBox("ForumDescription", null, new { @class = "form-control" })
                 @Html.ValidationMessage("ForumDescription", null, new {@class = "text-danger"})
@@ -61,12 +61,12 @@
                 {
                     <label>Select access level</label>
                     @Html.DropDownListFor(m => m.ForumType,
-                        new SelectList(Model.ForumAccess, "Value", "Text"), "Select access level",
+                        new SelectList(Model.ForumAccess, "Value", "Text"), "Cine poate avea acces la acest subiect",
                         new { @class = "form-control" })
                 }
                 //@Html.ValidationMessage("SectionType", null, new { @class = "text-danger" })
                 <br />
-                <button class="btn btn-sm btn-success" type="submit">Add new forum!</button>
+                <button class="btn btn-sm btn-success" type="submit">Adauga un nou subiect de discutie!</button>
             }
         </div>
     </div>

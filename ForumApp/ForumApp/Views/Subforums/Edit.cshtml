@@ -39,7 +39,7 @@
         <div class="col-6 offset-3">
             @using (Html.BeginForm(method: FormMethod.Post, actionName: "Edit", controllerName: "Subforums"))
             {
-                @Html.Label("SubforumName", "Edit the name of the Subforum")
+                @Html.Label("SubforumName", "Editeaza titlul discutiei")
                 ;
                 <br />
                 @Html.TextBox("SubforumName", @Model.SubforumName, new { @class = "form-control" })
@@ -48,7 +48,7 @@
                 @Html.ValidationMessage("SubforumName", null, new { @class = "text-danger" })
                 ;
                 <br />
-                @Html.Label("SubforumDesc", "Description of the Subforum")
+                @Html.Label("SubforumDesc", "Editeaza descrierea")
                 ;
                 <br />
                 @Html.TextBox("SubforumDesc", @Model.SubforumDesc, new { @class = "form-control" })
@@ -56,14 +56,15 @@
                 <br />
                 @if (User.IsInRole("Admin"))
                 {
-                @Html.DropDownListFor(m => m.SubforumType,
-            new SelectList(Model.AccessLevel, "Value", "Text"), "Select access level",
+                    @Html.DropDownListFor(m => m.SubforumType,
+            new SelectList(Model.AccessLevel, "Value", "Text"), "Cine poate avea acees la acesta discutie",
             new { @class = "form-control" })
                 }
                 <br />
-                <button class="btn btn-sm btn-success" type="submit">Edit</button>
+                <button class="btn btn-sm" type="submit">Editeaza discutia</button>
             }
         </div>
     </div>
+</div>
 
-    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })

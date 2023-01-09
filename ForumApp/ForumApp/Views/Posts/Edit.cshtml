@@ -41,7 +41,7 @@
         <div class="col-6 offset-3">
             @using (Html.BeginForm(method: FormMethod.Post, actionName: "Edit", controllerName: "Posts"))
             {
-                @Html.Label("PostTitle", "Edit the tite of the Post")
+                @Html.Label("PostTitle", "Editeaza titlul postarii")
                 ;
                 <br />
                 @Html.TextBox("PostTitle", Model.PostTitle, new { @class = "form-control" })
@@ -50,14 +50,14 @@
                 @Html.ValidationMessage("PostTitle", null, new { @class = "text-danger" })
                 ;
                 <br />
-                @Html.Label("PostContent", "Description of the Subforum")
+                @Html.Label("PostContent", "Textul postarii")
                 ;
                 <br />
                 @Html.TextArea("PostContent", Model.PostContent, new { @class = "form-control summernote" })
                 ;
                 <br />
                 <br />
-                <button class="btn btn-sm btn-success" type="submit">Edit</button>
+                <button class="btn btn-sm" type="submit">Editeaza postarea</button>
             }
         </div>
     </div>

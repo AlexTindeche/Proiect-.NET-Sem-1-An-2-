@@ -49,7 +49,6 @@ namespace ForumApp.Controllers
             
 
             post.PostDate = DateTime.Now;
-            //TODO: User
             return View(post);
         }
 

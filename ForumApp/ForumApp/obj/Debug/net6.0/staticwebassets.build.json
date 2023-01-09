@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "SXksKY9+wb0aLq+nZyXObLDCYyylnj02TCWeQXeheUc=",
+  "Hash": "ZD+wjWRaLJviYkWYOllfnYw5syjmlgvhpvA+pFJdMcE=",
   "Source": "ForumApp",
   "BasePath": "_content/ForumApp",
   "Mode": "Default",
@@ -1207,6 +1207,23 @@
       "OriginalItemSpec": "wwwroot\\css\\home.css"
     },
     {
+      "Identity": "D:\\Teme\\Informatica\\Github\\Proiect-.NET-Sem-1-An-2-\\ForumApp\\ForumApp\\wwwroot\\css\\login.css",
+      "SourceId": "ForumApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Teme\\Informatica\\Github\\Proiect-.NET-Sem-1-An-2-\\ForumApp\\ForumApp\\wwwroot\\",
+      "BasePath": "_content/ForumApp",
+      "RelativePath": "css/login.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\login.css"
+    },
+    {
       "Identity": "D:\\Teme\\Informatica\\Github\\Proiect-.NET-Sem-1-An-2-\\ForumApp\\ForumApp\\wwwroot\\css\\postShow.css",
       "SourceId": "ForumApp",
       "SourceType": "Discovered",
@@ -1290,6 +1307,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\subforums.css"
+    },
+    {
+      "Identity": "D:\\Teme\\Informatica\\Github\\Proiect-.NET-Sem-1-An-2-\\ForumApp\\ForumApp\\wwwroot\\css\\userEdit.css",
+      "SourceId": "ForumApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Teme\\Informatica\\Github\\Proiect-.NET-Sem-1-An-2-\\ForumApp\\ForumApp\\wwwroot\\",
+      "BasePath": "_content/ForumApp",
+      "RelativePath": "css/userEdit.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\userEdit.css"
     },
     {
       "Identity": "D:\\Teme\\Informatica\\Github\\Proiect-.NET-Sem-1-An-2-\\ForumApp\\ForumApp\\wwwroot\\favicon.ico",

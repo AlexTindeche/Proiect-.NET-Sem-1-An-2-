@@ -19,7 +19,7 @@
         <h1>Topic-uri</h1>
         @if (User.IsInRole("Admin"))     @* daca e true atunci este ADMIN *@
         {
-            <a class="btn" href="/Sections/New/">Creeaza un nou topic</a> @*trebuie mutat asta*@
+            <a class="btn" href="/Sections/New/">Creeaza o noua sectiune</a> @*trebuie mutat asta*@
         }
         <a class="btn" href="/Forums/New/">Creeaza un subiect de discutie nou </a>
     </div>
@@ -41,7 +41,6 @@
                             {
                                 <partial name="ForumInfo" model="forum"></partial>
                             }
-
                         }
                     </div>
                 </div>
@@ -49,31 +48,34 @@
         }
     </div>
 
-    @if (User.IsInRole("Admin"))
-    {
-
-        <hr style="height:3px; color: red" />
-        <p>Pentru ca esti admin poti vedea subiectele de discutie private</p>
-
-        @foreach (var sect in ViewBag.Sections)
+    <div class="privat">
+        @if (User.IsInRole("Admin"))
         {
-            @if (sect.SectionType == 1)                            // daca sectiunea este privata
+
+            <hr style="height:3px; color: red" />
+            <p>Pentru ca esti admin poti vedea subiectele de discutie private</p>
+
+            @foreach (var sect in ViewBag.Sections)
             {
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title titluSectiune"><a style="text-decoration:underline; color:#fef6ec;" href="/Sections/Show/@sect.Id">@sect.SectionName</a></h3>
+                @if (sect.SectionType == 1)                            // daca sectiunea este privata
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title titluSectiune"><a style="text-decoration:underline; color:#fef6ec;" href="/Sections/Show/@sect.Id">@sect.SectionName</a></h3>
 
-                        @foreach (ForumApp.Models.Forum forum in sect.Forums)
-                        {
-                            @if (forum.ForumType == 1)             // daca forumul este privat
+                            @foreach (ForumApp.Models.Forum forum in sect.Forums)
                             {
-                                <partial name="ForumInfo" model="forum"></partial>
-                            }
+                                @if (forum.ForumType == 1)             // daca forumul este privat
+                                {
+                                    <partial name="ForumInfo" model="forum"></partial>
+                                }
 
-                        }
+                            }
+                        </div>
                     </div>
-                </div>
+                }
             }
         }
-    }
+    </div>
+    
 </div>
