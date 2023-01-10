@@ -99,5 +99,24 @@
             }
         </div>
     </div>
+
+    <div class="privat">
+        @if (User.IsInRole("Admin"))
+        {
+
+            <hr style="height:3px; color: red" />
+            <p>Pentru ca esti admin poti vedea subiectele de discutie private</p>
+
+            @foreach (ForumApp.Models.Forum forum in Model.Forums)
+            {
+                @if (forum.ForumType == 1)                               // daca forumul este public
+                {
+                    <partial name="ForumInfo" model="forum"></partial>
+                }
+            }
+        }
+    </div>
 </div>
+
+
 
