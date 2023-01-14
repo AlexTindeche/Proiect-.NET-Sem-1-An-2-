@@ -65,7 +65,7 @@
 
                             @foreach (ForumApp.Models.Forum forum in sect.Forums)
                             {
-                                @if (forum.ForumType == 1)             // daca forumul este privat
+                                @if (forum.ForumType == 1 || forum.ForumType == 0)             // daca forumul este privat
                                 {
                                     <partial name="ForumInfo" model="forum"></partial>
                                 }
